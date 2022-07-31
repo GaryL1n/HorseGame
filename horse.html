@@ -19,7 +19,6 @@
             integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="./btn-sample.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
             rel="stylesheet"
@@ -257,7 +256,7 @@
                 };
                 doRun();
 
-                setInterval(() => {
+                const stratPlay = setInterval(() => {
                     // 複製箭
                     const copy = document.querySelector('.die').cloneNode(true);
                     copy.style.display = 'block';
@@ -281,7 +280,7 @@
                     wrap.appendChild(copy);
                     copy.classList.add('copy');
                     // 箭往馬的方向射
-                    setInterval(() => {
+                    const moveArrow = setInterval(() => {
                         $('.copy').css('left', '-=100px');
                     }, 100);
 
@@ -296,6 +295,10 @@
                         ) {
                             $('.timeP').css('opacity', '0');
                             $('.over').css('opacity', '1');
+                            return () => {
+                                clearInterval(moveArrow);
+                                clearInterval(stratPlay);
+                            };
                         }
                     });
 
